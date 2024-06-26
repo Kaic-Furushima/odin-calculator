@@ -60,6 +60,10 @@ function addNumber(number){
     if(screenString.indexOf(".") != -1 && number == "."){
         return 0;
     }
+    if(!(mainString.indexOf("+") != -1 || mainString.indexOf("-") != -1 || mainString.indexOf("*") != -1 || mainString.indexOf("/") != -1) && screenString == ""){
+        screenString = mainString;
+        mainString = "";
+    }
     screenString += number + "";
     showOnScreen();
 }
