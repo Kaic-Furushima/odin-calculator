@@ -1,13 +1,17 @@
 let result = null;
 let mainString = "";
-let beforeString = "";
-let afterString = "";
+let screenString = "";
+let operation = "";
 let toShow = document.createElement("p");
 
 const calculatorScreen = document.querySelector("#calculatorScreen");
 
-function operate(string){
-    let trimmedString = string.trim();
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
+}
+
+function operate(){
+    let trimmedString = mainString.trim();
     let array = trimmedString.split(" ");
     
     let num1 = parseFloat(array[0]);
@@ -15,36 +19,60 @@ function operate(string){
     let num2 = parseFloat(array[2]);
 
     if(operation == "+"){
-        result = num1 + num2;
+        screenString = num1 + num2;
     } else if(operation == "-"){
-        result = num1 - num2;
+        screenString = num1 - num2;
     } else if(operation == "*"){
-        result = num1 * num2;
+        screenString = num1 * num2;
     } else if(operation == "/"){
         if(num2 != 0){
-            result = num1 / num2;
+            screenString = num1 / num2;
         } else {
             result = "lol";
         }
     }
+    if(isFloat(screenString)){
+        screenString = screenString.toFixed(2);
+    }
+
+    mainString = screenString + "";
+    showOnScreen();
+    screenString = "";
 }
 
 function clean(){
-    string = "";
+    mainString = "";
+    screenString = "";
+    operation = "";
+    showOnScreen();
 }
 
 function showOnScreen(){
-    toShow.textContent = mainString;
+    toShow.textContent = screenString;
     calculatorScreen.appendChild(toShow)
 }
 
 function addNumber(number){
-    if(mainString[9] != null){
+    if(screenString[9] != null){
         return 0;
     }
-    if(mainString.indexOf(".") != -1 && number == "."){
+    if(screenString.indexOf(".") != -1 && number == "."){
         return 0;
     }
+    screenString += number + "";
     mainString += number + "";
     showOnScreen();
+}
+
+function setOperation(operationType){
+    if(!operation){
+        operation = operationType;
+        screenString = "";
+        mainString += operation;
+    } else{
+        operate();
+        operation = operationType;
+        screenString = "";
+        mainString += operation;
+    }
 }
