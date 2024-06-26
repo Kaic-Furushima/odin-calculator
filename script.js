@@ -1,4 +1,4 @@
-let result;
+let result = null;
 
 function operate(string){
     let array = string.split(" ");
