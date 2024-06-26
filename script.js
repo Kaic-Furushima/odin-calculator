@@ -1,32 +1,14 @@
 let result = null;
-let mainString;
+let mainString = "";
+let beforeString = "";
+let afterString = "";
+let toShow = document.createElement("p");
 
 const calculatorScreen = document.querySelector("#calculatorScreen");
 
-const buttonClean = document.querySelector("#cleanScreen");
-const buttonChange = document.querySelector("#changeSignal");
-const buttonPercentage = document.querySelector("#percentage");
-
-const buttonDivide = document.querySelector("#divide");
-const buttonMultiply = document.querySelector("#multiply");
-const buttonSubtract = document.querySelector("#subtract");
-const buttonAdd = document.querySelector("#add");
-const buttonEquals = document.querySelector("#equals");
-
-const buttonOne = document.querySelector("#one");
-const buttonTwo = document.querySelector("#two");
-const buttonThree = document.querySelector("#three");
-const buttonFour = document.querySelector("#four");
-const buttonFive = document.querySelector("#five");
-const buttonSix = document.querySelector("#six");
-const buttonSeven = document.querySelector("#seven");
-const buttonEight = document.querySelector("#eight");
-const buttonNine = document.querySelector("#nine");
-const buttonZero = document.querySelector("#zero");
-const buttonPoint = document.querySelector("#point");
-
 function operate(string){
-    let array = string.split(" ");
+    let trimmedString = string.trim();
+    let array = trimmedString.split(" ");
     
     let num1 = parseFloat(array[0]);
     let operation = array[1];
@@ -51,18 +33,18 @@ function clean(){
     string = "";
 }
 
-function addNumberToString(number){
-    string += (number + " ");
-}
-
-function addOperationToString(operation){
-    string += operation;
-}
-
-function showOnScreen(string){
-    let toShow = document.createElement("p");
-    toShow.textContent = string;
+function showOnScreen(){
+    toShow.textContent = mainString;
     calculatorScreen.appendChild(toShow)
 }
 
-showOnScreen("2939");
+function addNumber(number){
+    if(mainString[9] != null){
+        return 0;
+    }
+    if(mainString.indexOf(".") != -1 && number == "."){
+        return 0;
+    }
+    mainString += number + "";
+    showOnScreen();
+}
