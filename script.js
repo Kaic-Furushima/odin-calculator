@@ -39,7 +39,6 @@ function operate(){
 
     mainString = screenString + "";
     showOnScreen();
-    screenString = "";
 }
 
 function clean(){
@@ -62,11 +61,11 @@ function addNumber(number){
         return 0;
     }
     screenString += number + "";
-    mainString += number + "";
     showOnScreen();
 }
 
 function setOperation(operationType){
+    mainString += screenString + "";
     if(!operation){
         operation = operationType;
         screenString = "";
@@ -77,4 +76,15 @@ function setOperation(operationType){
         screenString = "";
         mainString += operation;
     }
+}
+
+function changeSignal(){
+    if(mainString != ""){
+        screenString = -(parseFloat(mainString));
+        mainString = screenString;
+    } else {
+        screenString = -(parseFloat(screenString));
+        mainString = screenString;
+    }
+    showOnScreen();
 }
