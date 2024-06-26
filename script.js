@@ -28,8 +28,10 @@ function operate(){
         if(num2 != 0){
             screenString = num1 / num2;
         } else {
-            result = "lol";
+            screenString = "lol";
         }
+    } else if(operation == "%"){
+        screenString = num1 / 100;
     }
     if(isFloat(screenString)){
         screenString = screenString.toFixed(2);
